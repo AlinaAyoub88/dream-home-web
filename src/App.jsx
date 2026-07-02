@@ -1,5 +1,5 @@
-
 import ChatbotWidget from './components/ai/ChatbotWidget'; 
+import PropertySearch from './components/properties/PropertySearch'; // Import your new search feature!
 
 function App() {
   return (
@@ -8,18 +8,22 @@ function App() {
       backgroundColor: '#F5F0EB', 
       display: 'flex', 
       flexDirection: 'column',
-      justifyContent: 'center', 
-      alignItems: 'center' 
+      justifyContent: 'flex-start', 
+      alignItems: 'center',
+      paddingTop: '40px'
     }}>
-      {/* Deep Navy text color from your project details */}
-      <h1 style={{ color: '#1A2A3A', fontFamily: 'sans-serif', fontSize: '2rem' }}>
+      {/* Deep Navy text headings */}
+      <h1 style={{ color: '#1A2A3A', fontFamily: 'sans-serif', fontSize: '2rem', fontWeight: 'bold' }}>
         Dream Home Project Live Testing
       </h1>
-      <p style={{ color: '#7F8C8D', marginTop: '10px' }}>
-        Alina Ayoub's AI Chatbot Module
+      <p style={{ color: '#7F8C8D', marginTop: '10px', marginBottom: '20px' }}>
+        Alina Ayoub's Advanced Search & Filter Module
       </p>
+
+      {/* RENDER PROPERTY SEARCH */}
+      <PropertySearch />
       
-      {/* Your Chatbot Floating Button */}
+      {/* RENDER CHATBOT WIDGET */}
       <ChatbotWidget />
     </div>
   );
