@@ -1,190 +1,170 @@
 import { useState } from 'react';
-import { X, Check, Shield, Maximize, Bed, Bath, DollarSign } from 'lucide-react';
+import { Search, SlidersHorizontal, MapPin, DollarSign, Home } from 'lucide-react';
 
 /**
- * PropertyCompare Component
- * Provides a responsive side-by-side comparison matrix for premium listings.
- * Strictly follows the Dream Home design standards (Deep Navy #1A2A3A & Royal Gold #C9A84C).
+ * PropertySearch Component
+ * Implements advanced real-estate search filters matching the Dream Home design system.
  */
-const PropertyCompare = () => {
-  // Safe mock data array matching the database schemas and required criteria
-  const [comparedProperties, setComparedProperties] = useState([
-    {
-      id: 'prop-lux-01', // Strict unique string keys for React rendering safety
-      propertyId: 'P001',
-      title: 'Luxury Villa - 77m²',
-      price: 150000,
-      size: 77,
-      bedrooms: 3,
-      bathrooms: 2,
-      location: 'Lahore, Pakistan',
-      type: 'villa',
-      features: ['Pool', 'Garden', 'Parking'],
-      insurance: 'Guaranteed'
-    },
-    {
-      id: 'prop-smart-02', // Strict unique string keys for React rendering safety
-      propertyId: 'P002',
-      title: 'Smart Home - 60m²',
-      price: 132000,
-      size: 60,
-      bedrooms: 2,
-      bathrooms: 2,
-      location: 'Dubai, UAE',
-      type: 'smart-home',
-      features: ['Smart Automation', 'Parking', 'Security System'],
-      insurance: 'Premium Covered'
-    }
-  ]);
+const PropertySearch = () => {
+  // State for search query and expanding the advanced panel
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
-  /**
-   * Helper to remove a property card from the active comparison state array
-   */
-  const handleRemoveProperty = (id) => {
-    setComparedProperties(prev => prev.filter(item => item.propertyId !== id));
+  // States for advanced filter selections matching database schemas
+  const [filters, setFilters] = useState({
+    city: '',
+    type: '',
+    priceRange: '',
+    bedrooms: ''
+  });
+
+  // Handle inputs for basic and advanced selection state updates
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
+  // Form submission handler for query processing
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log('Executing search with data:', { searchQuery, ...filters });
+    // This will cleanly bridge out to Zainab's PropertyGrid context hooks later
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 my-12 animate-fade-in">
-      {/* SECTION HEADER */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1A2A3A] tracking-tight">
-          Compare Dream Properties
-        </h2>
-        <p className="text-sm text-gray-500 mt-2">
-          Analyze technical specifications side-by-side to choose your ideal home.
-        </p>
-      </div>
+    <div className="w-full max-w-5xl mx-auto px-4 my-8">
+      {/* SEARCH CONTAINER BAR */}
+      <form 
+        onSubmit={handleSearchSubmit}
+        className="bg-white rounded-2xl shadow-xl p-4 border border-[#F5F0EB] transition-all duration-300"
+      >
+        <div className="flex flex-col md:flex-row gap-3 items-center">
+          
+          {/* Main Keyword Search Input Box */}
+          <div className="relative w-full flex-1">
+            <Search className="absolute left-4 top-3.5 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by area, society, or specific keywords..."
+              className="w-full bg-gray-50 text-sm text-gray-800 pl-12 pr-4 py-3.5 rounded-xl border border-gray-100 focus:outline-none focus:border-[#C9A84C] transition-colors"
+            />
+          </div>
 
-      {/* CONDITIONAL CONTENT VIEW CONTROL */}
-      {comparedProperties.length === 0 ? (
-        <div className="text-center p-12 bg-white rounded-2xl shadow-md border border-gray-100">
-          <p className="text-sm text-gray-500">No properties selected for comparison.</p>
-        </div>
-      ) : (
-        /* RESPONSIVE SCROLLABLE COMPARISON TABLE CARD */
-        <div className="bg-white rounded-2xl shadow-xl border border-[#F5F0EB] overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px] border-collapse text-left">
-              
-              {/* TABLE HEADER */}
-              <thead>
-                <tr className="bg-[#1A2A3A] text-white">
-                  <th className="p-4 text-sm font-semibold w-1/4 border-b border-[#C9A84C]">Specifications</th>
-                  {comparedProperties.map((item) => (
-                    <th key={item.id} className="p-4 text-sm font-semibold w-1/3 border-b border-[#C9A84C] relative">
-                      <div className="pr-6">
-                        <div className="text-xs text-[#C9A84C] font-mono uppercase tracking-wider mb-1">{item.type}</div>
-                        <div className="font-bold truncate text-white">{item.title}</div>
-                      </div>
-                      <button 
-                        onClick={() => handleRemoveProperty(item.propertyId)}
-                        className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200"
-                        title="Remove from comparison"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
+          {/* Action Interface Buttons */}
+          <div className="flex gap-2 w-full md:w-auto justify-end">
+            {/* Toggle Button for Advanced Filters Panel */}
+            <button
+              type="button"
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              className={`flex items-center gap-2 px-4 py-3.5 rounded-xl text-sm font-medium border transition-all duration-300 ${
+                showAdvanced 
+                  ? 'bg-[#1A2A3A] text-white border-[#1A2A3A]' 
+                  : 'bg-white text-[#1A2A3A] border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span>Filters</span>
+            </button>
 
-              {/* TABLE BODY */}
-              <tbody className="divide-y divide-gray-100 text-sm text-gray-700">
-                
-                {/* 1. Price Comparison Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A] flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-[#C9A84C]" /> Price Valuation
-                  </td>
-                  {comparedProperties.map((item) => (
-                    <td key={`price-${item.id}`} className="p-4 font-bold text-[#1A2A3A] text-base">
-                      ${item.price.toLocaleString()}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 2. Area Dimension Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A] flex items-center gap-2">
-                    <Maximize className="w-4 h-4 text-[#C9A84C]" /> Covered Area
-                  </td>
-                  {comparedProperties.map((item) => (
-                    <td key={`size-${item.id}`} className="p-4">
-                      {item.size} m²
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 3. Bedroom Configuration Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A] flex items-center gap-2">
-                    <Bed className="w-4 h-4 text-[#C9A84C]" /> Bedrooms
-                  </td>
-                  {comparedProperties.map((item) => (
-                    <td key={`beds-${item.id}`} className="p-4 font-medium">
-                      {item.bedrooms} Bed Spaces
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 4. Washroom Layout Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A] flex items-center gap-2">
-                    <Bath className="w-4 h-4 text-[#C9A84C]" /> Bathrooms
-                  </td>
-                  {comparedProperties.map((item) => (
-                    <td key={`baths-${item.id}`} className="p-4">
-                      {item.bathrooms} Luxury Baths
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 5. Geographic Location Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A]">Geographic Area</td>
-                  {comparedProperties.map((item) => (
-                    <td key={`loc-${item.id}`} className="p-4 text-xs text-gray-600">
-                      {item.location}
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 6. Integrated Special Features Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A]">Premium Features</td>
-                  {comparedProperties.map((item) => (
-                    <td key={`feat-${item.id}`} className="p-4">
-                      <div className="flex flex-wrap gap-1.5">
-                        {item.features.map((feat, idx) => (
-                          <span key={`${item.id}-feat-${idx}`} className="bg-[#F5F0EB] text-[#1A2A3A] text-xs px-2.5 py-1 rounded-md font-medium border border-gray-200/60">
-                            {feat}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                  ))}
-                </tr>
-
-                {/* 7. Insurance Protection Support Row */}
-                <tr className="hover:bg-gray-50/70 transition-colors">
-                  <td className="p-4 font-semibold text-[#1A2A3A] flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-[#C9A84C]" /> Property Insurance
-                  </td>
-                  {comparedProperties.map((item) => (
-                    <td key={`ins-${item.id}`} className="p-4 text-xs font-semibold text-emerald-600 flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" /> {item.insurance}
-                    </td>
-                  ))}
-                </tr>
-
-              </tbody>
-            </table>
+            {/* Primary Submit Action (Royal Gold theme color) */}
+            <button
+              type="submit"
+              className="bg-[#C9A84C] text-[#1A2A3A] hover:bg-[#1A2A3A] hover:text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md whitespace-nowrap"
+            >
+              Search Now
+            </button>
           </div>
         </div>
-      )}
+
+        {/* EXPANDABLE ADVANCED FILTERS PANEL */}
+        {showAdvanced && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-100 animate-fade-in">
+            
+            {/* 1. City / Target Location Dropdown */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-[#1A2A3A] flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" />
+                Location / Region
+              </label>
+              <select
+                value={filters.city}
+                onChange={(e) => handleFilterChange('city', e.target.value)}
+                className="w-full bg-gray-50 text-xs text-gray-700 p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C9A84C]"
+              >
+                <option value="">All Locations</option>
+                <option value="lahore">Lahore, PK</option>
+                <option value="karachi">Karachi, PK</option>
+                <option value="dubai">Dubai, UAE</option>
+                <option value="london">London, UK</option>
+              </select>
+            </div>
+
+            {/* 2. Property Categories Selection */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-[#1A2A3A] flex items-center gap-1.5">
+                <Home className="w-3.5 h-3.5 text-[#C9A84C]" />
+                Property Type
+              </label>
+              <select
+                value={filters.type}
+                onChange={(e) => handleFilterChange('type', e.target.value)}
+                className="w-full bg-gray-50 text-xs text-gray-700 p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C9A84C]"
+              >
+                <option value="">All Types</option>
+                <option value="villa">Luxury Villa</option>
+                <option value="house">Modern House</option>
+                <option value="apartment">Apartment</option>
+                <option value="smart-home">Smart Home</option>
+              </select>
+            </div>
+
+            {/* 3. Budget & Pricing Brackets */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-[#1A2A3A] flex items-center gap-1.5">
+                <DollarSign className="w-3.5 h-3.5 text-[#C9A84C]" />
+                Budget Scope
+              </label>
+              <select
+                value={filters.priceRange}
+                onChange={(e) => handleFilterChange('priceRange', e.target.value)}
+                className="w-full bg-gray-50 text-xs text-gray-700 p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C9A84C]"
+              >
+                <option value="">Any Budget</option>
+                <option value="0-50k">Under $50,000</option>
+                <option value="50k-150k">$50,000 - $150,000</option>
+                <option value="150k-300k">$150,000 - $300,000</option>
+                <option value="300k+">$300,000+</option>
+              </select>
+            </div>
+
+            {/* 4. Room Configuration / Sizing Layout */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-[#1A2A3A] flex items-center gap-1.5">
+                <Home className="w-3.5 h-3.5 text-[#C9A84C]" />
+                Bedrooms Count
+              </label>
+              <select
+                value={filters.bedrooms}
+                onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
+                className="w-full bg-gray-50 text-xs text-gray-700 p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C9A84C]"
+              >
+                <option value="">Any Count</option>
+                <option value="1">1 Bedroom</option>
+                <option value="2">2 Bedrooms</option>
+                <option value="3">3 Bedrooms</option>
+                <option value="4+">4+ Bedrooms</option>
+              </select>
+            </div>
+
+          </div>
+        )}
+      </form>
     </div>
   );
 };
 
-export default PropertyCompare;
+export default PropertySearch;
