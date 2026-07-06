@@ -1,12 +1,12 @@
 import ChatbotWidget from './components/ai/ChatbotWidget'; 
 import PropertySearch from './components/properties/PropertySearch';
-import PropertyCompare from './components/ai/PropertyCompare'; // Import remaining final task!
+import PropertyCompare from './components/ai/PropertyCompare';
 
 function App() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      backgroundColor: '#F5F0EB', // Clean canvas background
+      backgroundColor: '#F5F0EB', 
       display: 'flex', 
       flexDirection: 'column',
       justifyContent: 'flex-start', 
