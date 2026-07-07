@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react'; // To this!
 import { MessageSquare, X } from 'lucide-react';
 // This path looks inside the same folder for ChatWindow.jsx
 import ChatWindow from './ChatWindow'; 

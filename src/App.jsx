@@ -1,6 +1,7 @@
 import ChatbotWidget from './components/ai/ChatbotWidget'; 
 import PropertySearch from './components/properties/PropertySearch';
 import PropertyCompare from './components/ai/PropertyCompare';
+import AIPropertyMatch from './components/ai/AIPropertyMatch'; // Added your missing component!
 
 function App() {
   return (
@@ -17,10 +18,13 @@ function App() {
       {/* 1. Advanced Property Search Filter Panel Component */}
       <PropertySearch />
 
-      {/* 2. Side-by-Side Properties Specs Comparison Component */}
+      {/* 2. Intelligent AI Property Match Analytics Panel */}
+      <AIPropertyMatch />
+
+      {/* 3. Side-by-Side Properties Specs Comparison Component */}
       <PropertyCompare />
       
-      {/* 3. AI Floating Chat Bot Overlay Component */}
+      {/* 4. AI Floating Chat Bot Overlay Component */}
       <ChatbotWidget />
     </div>
   );
