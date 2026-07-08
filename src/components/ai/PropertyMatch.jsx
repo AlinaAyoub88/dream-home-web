@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { Sparkles, CheckCircle, Percent, Home, MapPin } from 'lucide-react';
 
-/**
- * AIPropertyMatch Component
- * Calculates and displays AI-driven property matching scores based on user preferences.
- * Adheres strictly to Deep Navy #1A2A3A and Royal Gold #C9A84C theme palettes.
- */
+
 const AIPropertyMatch = () => {
   // State for tracking AI processing animation trigger
   const [isAnalyzing, setIsAnalyzing] = useState(false);
