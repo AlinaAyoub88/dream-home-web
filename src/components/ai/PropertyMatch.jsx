@@ -69,7 +69,7 @@ const AIPropertyMatch = () => {
                 key={item.id} 
                 className="relative bg-[#F5F0EB]/40 rounded-xl p-5 border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow"
               >
-                {/* Score Floating Badge (Royal Gold theme) */}
+                {/* Score Floating Badge*/}
                 <div className="absolute top-4 right-4 bg-[#C9A84C] text-[#1A2A3A] px-2.5 py-1.5 rounded-lg font-bold text-xs flex items-center gap-1">
                   <Percent className="w-3 h-3" />
                   <span>{item.matchScore} Match</span>

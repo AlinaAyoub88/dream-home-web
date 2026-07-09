@@ -1,7 +1,7 @@
 import ChatbotWidget from './components/ai/ChatbotWidget'; 
 import PropertySearch from './components/properties/PropertySearch';
 import PropertyCompare from './components/ai/PropertyCompare';
-import AIPropertyMatch from './components/ai/PropertyMatch'; // Added your missing component!
+import AIPropertyMatch from './components/ai/PropertyMatch'; 
 
 function App() {
   return (

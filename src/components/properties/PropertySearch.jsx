@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { Search, SlidersHorizontal, MapPin, DollarSign, Home } from 'lucide-react';
 
-/**
- * PropertySearch Component
- * Implements advanced real-estate search filters matching the Dream Home design system.
- */
+
 const PropertySearch = () => {
   // State for search query and expanding the advanced panel
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,7 +27,7 @@ const PropertySearch = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     console.log('Executing search with data:', { searchQuery, ...filters });
-    // This will cleanly bridge out to Zainab's PropertyGrid context hooks later
+
   };
 
   return (
@@ -70,7 +67,7 @@ const PropertySearch = () => {
               <span>Filters</span>
             </button>
 
-            {/* Primary Submit Action (Royal Gold theme color) */}
+            {/* Primary Submit Action */}
             <button
               type="submit"
               className="bg-[#C9A84C] text-[#1A2A3A] hover:bg-[#1A2A3A] hover:text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md whitespace-nowrap"

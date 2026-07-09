@@ -4,7 +4,6 @@ import { X, Check, Shield, Maximize, Bed, Bath, DollarSign } from 'lucide-react'
 /**
  * PropertyCompare Component
  * Provides a responsive side-by-side comparison matrix for premium listings.
- * Strictly follows the Dream Home design standards (Deep Navy #1A2A3A & Royal Gold #C9A84C).
  */
 const PropertyCompare = () => {
   // Safe mock data array matching the database schemas and required criteria
@@ -40,8 +39,8 @@ const PropertyCompare = () => {
   /**
    * Helper to remove a property card from the active comparison state array
    */
-  const handleRemoveProperty = (id) => {
-    setComparedProperties(prev => prev.filter(item => item.propertyId !== id));
+  const handleRemoveProperty = (propertyId) => {
+    setComparedProperties(prev => prev.filter(item => item.propertyId !== propertyId));
   };
 
   return (
@@ -172,8 +171,10 @@ const PropertyCompare = () => {
                     <Shield className="w-4 h-4 text-[#C9A84C]" /> Property Insurance
                   </td>
                   {comparedProperties.map((item) => (
-                    <td key={`ins-${item.id}`} className="p-4 text-xs font-semibold text-emerald-600 flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" /> {item.insurance}
+                    <td key={`ins-${item.id}`} className="p-4 text-xs font-semibold text-emerald-600">
+                      <div className="flex items-center gap-1">
+                        <Check className="w-3.5 h-3.5" /> {item.insurance}
+                      </div>
                     </td>
                   ))}
                 </tr>

@@ -69,7 +69,7 @@ const ChatWindow = ({ onClose }) => {
   return (
     <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-[#F5F0EB] overflow-hidden animate-fade-in">
       
-      {/* HEADER: Deep Navy (#1A2A3A) Background with Royal Gold (#C9A84C) Accents */}
+      {}
       <div className="bg-[#1A2A3A] text-white p-4 flex justify-between items-center border-b border-[#C9A84C]">
         <div className="flex items-center gap-3">
           <div className="bg-[#C9A84C] p-2 rounded-full text-[#1A2A3A]">
